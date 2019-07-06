@@ -41,16 +41,16 @@ ejemplo.
 
 2. Subir los artefactos producidos por la compilación al bucket mencionado en los prerequisitos. Los archivos son:
 
-   - [serverless-aws-helloworld-1.0.0.jar][3]
-   - [springboot-helloworld-1.0.0.jar][1]
-   - [springboot-tomcat-helloworld-1.0.0.war][2]
+   - ./serverless-aws-helloworld/target/serverless-aws-helloworld-1.0.0.jar
+   - ./springboot-helloworld/target/springboot-helloworld-1.0.0.jar
+   - ./springboot-tomcat-helloworld/target/springboot-tomcat-helloworld-1.0.0.war
 
    Los archivos deben hacerse públicos en el bucket para que Cloudformation pueda acceder a ellos fácilmente.
 
 #### Ejemplo con EC2
 
 En este ejemplo la idea es crear una instancia EC2, dentro de dicha instancia instalar el JDK 8 (AWS Corretto) y luego,
-subir a la instancia un ejecutable de SpringBoot ([springboot-helloworld-1.0.0.jar][1]) que es nuestra aplicación.
+subir a la instancia un ejecutable de SpringBoot (springboot-helloworld-1.0.0.jar) que es nuestra aplicación.
 
 ##### Ajustes del script:
 * En la línea 69 del script, si se ha cambiado el nombre del artefacto, reemplazar por la ubicación del artefacto en 
@@ -59,7 +59,7 @@ nuestro bucket:
    "source": "https://URL pública del artefacto"
    ```
 
-Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.json][4] del 
+Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.json][1] del 
 proyecto [cloudformation-ec2](./cloudformation-ec2)
    
 ##### Parámetros del script:
@@ -80,7 +80,7 @@ la URL para acceder a nuestra aplicación de ejemplo.
 #### Ejemplo con Elastic Beanstalk
 
 En este ejemplo la idea es crear una aplicación de Elastic Beanstalk con Java 8 y Tomcat y desplegar nuestro artefacto
-([springboot-tomcat-helloworld-1.0.0.jar][2]) que es nuestra aplicación.
+(springboot-tomcat-helloworld-1.0.0.jar) que es nuestra aplicación.
 
 ##### Ajustes del script:
 * En las líneas 68 del script, si se ha cambiado el nombre del artefacto, reemplazar por la ubicación del artefacto
@@ -89,7 +89,7 @@ en nuestro bucket:
    "S3Key" : "NOMBRE DEL ARCHIVO DENTRO DEL BUCKET"
    ```
 
-Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.json][5] del 
+Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.json][2] del 
 proyecto [cloudformation-elasticbeanstalk](./cloudformation-elasticbeanstalk)
    
 ##### Parámetros del script:
@@ -105,7 +105,7 @@ la URL para acceder a nuestra aplicación de ejemplo.
 
 En este ejemplo la idea es crear una aplicación Serverless que conta de una función AWS Lambda en Java y un AWS API 
 Gateway que servirá de entrypoint a la función, y luego, subir a la función un jar 
-([serverless-aws-helloworld-1.0.0.jar][3]) que es el código de nuestra función.
+(serverless-aws-helloworld-1.0.0.jar) que es el código de nuestra función.
 
 ##### Ajustes del script:
 * En las líneas 67 y 68 del script, si se ha cambiado el nombre del artefacto, reemplazar por la ubicación del artefacto
@@ -115,7 +115,7 @@ en nuestro bucket:
    Key: NOMBRE DEL ARCHIVO DENTRO DEL BUCKET
    ```
 
-Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.json][6] del 
+Una vez que el script esté listo, se debe crear un nuevo Stack en Cloudformation utilizando el [template.yml][3] del 
 proyecto [cloudformation-serverless](./cloudformation-serverless)
    
 ##### Parámetros del script:
@@ -124,10 +124,6 @@ proyecto [cloudformation-serverless](./cloudformation-serverless)
 Cuando el stack se crea exitosamente, podemos dirigirnos al tab de Outputs y en el valor de **ApiUrl** se encontrará
 la URL para acceder a nuestra aplicación de ejemplo.
 
-[1]: ./springboot-helloworld/target/springboot-helloworld-1.0.0.jar
-[2]: ./springboot-tomcat-helloworld/target/springboot-tomcat-helloworld-1.0.0.war
-[3]: ./serverless-aws-helloworld/target/serverless-aws-helloworld-1.0.0.jar
-
-[4]: ./cloudformation-ec2/template.json
-[5]: ./cloudformation-elasticbeanstalk/template.json
-[6]: ./cloudformation-serverless/template.yml
+[1]: ./cloudformation-ec2/template.json
+[2]: ./cloudformation-elasticbeanstalk/template.json
+[3]: ./cloudformation-serverless/template.yml
